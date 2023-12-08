@@ -1,0 +1,15 @@
+<odoo>
+  <data>
+    <!-- Form view for "model" -->
+    <!-- <record id="inherit_stock_picking" model="ir.ui.view">
+        <field name="name">inherit.stock.picking</field>
+        <field name="model">stock.picking</field>
+         <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <button name="function_name" string="string" type="object" class="oe_highlight"/>           
+        </field>
+    </record> -->
+    
+    
+  </data>
+</odoo>
