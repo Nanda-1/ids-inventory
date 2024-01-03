@@ -28,6 +28,9 @@
         'views/views.xml',
         'views/templates.xml',
         'views/inherit_res_partner.xml',
+        'views/inherit_stock_picking.xml',
+        'report/report_stock_picking.xml',
+        # 'report/stock_report_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

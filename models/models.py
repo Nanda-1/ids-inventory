@@ -83,7 +83,10 @@ class InheritStockPicking(models.Model):
                     if not move.description_picking:
                         move.description_picking = move.product_id.with_context(lang=move._get_lang())._get_description(move.picking_id.picking_type_id)
         return pickings
-
+    
+    def print_inherit_report(self):
+        self.write({'printed': True})
+        return self.env.ref('ids_inherit_inventory.inherit_action_report_picking').report_action(self)
 class InheritContact(models.Model):
     _inherit = 'res.partner'
     
