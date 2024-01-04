@@ -8,7 +8,7 @@ from datetime import datetime
 class InheritStockPicking(models.Model):
     _inherit = 'stock.picking'
     _description = 'ids_inherit_inventory.ids_inherit_inventory'
-
+    #helper function 
     def write_roman(num):
 
         roman = OrderedDict()
@@ -55,6 +55,7 @@ class InheritStockPicking(models.Model):
                     partner_name = partner.singkatan if partner else ''
                     
                     current_month = datetime.now().month
+                    # change sequence to 1 if month change
                     if str(current_month) != last_generated_month:
                         picking_type.sequence_id.sudo().write({'number_next_actual': 1})
                         self.env['ir.config_parameter'].sudo().set_param('last_generated_month', str(current_month))
