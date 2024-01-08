@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- <template id="inherit_" inherit_id="web.external_layout_standard" >
+         <xpath expr="//div[@t-att-style='report_header_style']" position="replace">
+            <div>TESTING2</div>
+        </xpath>
+    </template> -->
+    <template id="inherit_report_delivery_document" inherit_id="stock.report_delivery_document" >
+        <xpath expr="//h2" position="inside">
+            <div name="testing" >TESTING2</div>
+        </xpath>
+
+        <xpath expr="//div[@name='div_outgoing_address']" position="replace">
+            <div>TESTING ADDRESS</div>
+        </xpath>
+    </template>
+
+
+</odoo>

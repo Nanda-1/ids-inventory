@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="ibs_internal_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <div class="header">
+            <div class="text-center">
+                <span t-esc="company.name"/>
+            </div>
+        </div>
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+          <t t-out="0"/>
+        </div>
+    </template>
+
+    <template id="report_ibs_delivery">
+    <t t-foreach="docs" t-as="o">
+        <t t-call="web.html_container">
+            <t t-call="ids-inventory.ibs_internal_layout">
+                <t t-set="o" t-value="o.with_context(lang=o._get_report_lang())" />
+                <t t-set="partner" t-value="o.partner_id or (o.move_ids and o.move_ids[0].partner_id) or False"/>
+                <t t-if="not company">
+                    <!-- Multicompany -->
+                    <t t-if="company_id">
+                        <t t-set="company" t-value="company_id"/>
+                    </t>
+                    <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                        <t t-set="company" t-value="o.company_id.sudo()"/>
+                    </t>
+                    <t t-else="else">
+                        <t t-set="company" t-value="res_company"/>
+                    </t>
+                </t>
+                <h2 class="text-center">DELIVERY ORDER</h2>
+                <div class="row p-2 o_boxed_header mb-2">
+                    <div class="col-6" name="div_delivery_order_header_1">
+                        <div>
+                            <span><strong>DO Code:</strong> <span t-field="o.name"/></span>
+                        </div>
+                        <div>
+                            <span><strong>Kontrak :</strong> ?? </span>
+                        </div>
+                        <div>
+                            <span><strong>Description :</strong> <span t-field="partner.name"/></span>
+                        </div>
+                        <div>
+                            <span><strong>Delivery Type :</strong>?? </span>
+                        </div>
+                    </div>
+                    <div class="col-6" name="div_delivery_order_header_2">
+                        <div>
+                            <span><strong>Date:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></span>
+                        </div>
+                        <div>
+                            <span><strong>SO ID:</strong> ??</span>
+                        </div>
+                        <div>
+                            <span><strong>Warranty Card :</strong> </span>
+                        </div>
+                        <div>
+                            <span><strong>Delivery Status :</strong> ??</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-2 o_boxed_header mb-2">
+                    <div class="col-6" name="div_outgoing_address">
+                        <div name="outgoing_delivery_address"
+                            t-if="o.should_print_delivery_address()">
+                            <span><strong>Delivery Address:</strong></span>
+                            <div t-field="o.move_ids[0].partner_id"
+                                t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                        </div>
+                        <div name="outgoing_warehouse_address"
+                                t-elif="o.picking_type_id.code != 'internal' and o.picking_type_id.warehouse_id.partner_id">
+                            <span><strong>Warehouse Address:</strong></span>
+                            <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                                t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                        </div>
+                        <div t-if="o.state" class="col-auto" name="div_sched_date">
+                            <strong>Delivery Date:</strong>
+                            <t t-if="o.state == 'done'">
+                                <p t-field="o.date_done"/>
+                            </t>
+                            <t t-if="o.state != 'done'">
+                                <p t-field="o.scheduled_date"/>
+                           </t>
+                        </div>
+                    </div>
+                    <div class="col-6" name="div_return_address">
+                        <div name="return_delivery_address">
+                            <span><strong>Return Address:</strong></span>
+                            <div t-field="o.company_id" 
+                                t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                        </div>
+                    </div>
+                </div>
+                <div class="page">
+                    <table class="table table-sm mt48" name="stock_move_line_table">
+                    <thead>
+                        <tr>
+                            <th name="th_sml_product"><strong>Product</strong></th>
+                            <th>Lot/Serial Number</th>
+                            <th class="text-center">
+                                <strong>Ordered</strong>
+                            </th>
+                            <th class="text-center"><strong>Delivered</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>TEST1</td>
+                        <td>TEST2</td>
+                        <td>TEST3</td>
+                        <td>TEST4</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <div name="ibs_bottom_sign_list " class="row p-2 text-center" style="min-height:150px">
+                    <div class="col-3 card ">
+                        <span>Authorized by</span>
+                        <br />
+                        <br />
+                        <br />
+                        <span>Person 1</span>
+                    </div>
+                    <div class="col-3 card ">
+                        <span>Checked By</span>
+                    </div>
+                    <div class="col-3 card ">
+                        <span>Requested By</span>
+                        <br />
+                        <br />
+                        <br />
+                        <span>Person 1</span>
+                    </div>
+                    <div class="col-3 card ">
+                        <span>Recieved By</span>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+    </template>
+</odoo>

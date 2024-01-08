@@ -7,12 +7,26 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='do_print_picking']" position="replace">
-                <button name="print_inherit_report" string="TESSS" type="object"/>
+            <xpath expr="//button[@name='do_print_picking']" position="after">
+                <button name="print_inherit_report" string="IBS-PRINT-PREVIEW" type="object" />
                 
             </xpath>
         </field>
     </record>
+
+    
+        <record id="ibs_report_deliveryslip_action" model="ir.actions.report">
+            <field name="name">IBS Delivery</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">ids-inventory.report_ibs_delivery</field>
+            <field name="report_file">ids-inventory.report_ibs_delivery</field>
+            <field name="print_report_name">'Delivery - %s - %s' % (object.partner_id.name or '', object.name)</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+        </record>
+    
+
     
 
 </odoo>

@@ -3,15 +3,14 @@
     'name': "ids_inherit_inventory",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        IBS Inventory """,
 
     'description': """
-        Long description of module's purpose
+        To Create Report for IBS
     """,
-
-    'author': "My Company",
-    'website': "https://www.yourcompany.com",
+    "license": "LGPL-3",
+    'author': "Nanda Soe",
+    'website': "https://ib-synergy.co.id",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/16.0/odoo/addons/base/data/ir_module_category_data.xml
@@ -25,15 +24,19 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        # 'views/views.xml',
+        # 'views/templates.xml',
+        
         'views/inherit_res_partner.xml',
         'views/inherit_stock_picking.xml',
+        
         'report/report_stock_picking.xml',
+        'report/inherit_stock_deliveryslip.xml',
+        'report/report_deliveryslip_new.xml',
         # 'report/stock_report_views.xml',
     ],
     # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+    # 'demo': [
+    #     'demo/demo.xml',
+    # ],
 }
