@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-6" name="div_delivery_order_header_2">
                         <div>
-                            <span><strong>Print Date:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></span>
+                            <span><strong>Print Date:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/></span>
                         </div>
                         <div>
                             <span><strong>SO ID:</strong> </span>
