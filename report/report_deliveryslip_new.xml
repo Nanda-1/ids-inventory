@@ -130,10 +130,13 @@
                                     <span t-field="move.description_picking"/>
                                 </p>
                             </td>
-                            <t t-if="has_serial_number" name="move_lot_line_name">
-                                <td><span t-field="move.lot_ids"/></td>
-                            </t>
-                             <td>
+                                <td> 
+                                    <div t-foreach="move.lot_ids" t-as="lot_id">
+                                        <span t-field="lot_id.name"/> 
+                                    </div>
+                                </td>
+                            
+                             <td class="text-center">
                                     <span t-field="move.product_uom_qty"/>
                                     <span t-field="move.product_uom"/>
                             </td>
