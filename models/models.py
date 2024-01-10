@@ -8,6 +8,11 @@ from datetime import datetime
 class InheritStockPicking(models.Model):
     _inherit = 'stock.picking'
     _description = 'ids_inherit_inventory.ids_inherit_inventory'
+
+    authorize_id = fields.Many2one(
+        'res.users', 'Authorize By',
+        check_company=True,
+        states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
     #helper function 
     def write_roman(num):
 

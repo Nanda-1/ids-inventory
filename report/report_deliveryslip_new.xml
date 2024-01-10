@@ -51,27 +51,27 @@
                             <span><strong>DO Code:</strong> <span t-field="o.name"/></span>
                         </div>
                         <div>
-                            <span><strong>Kontrak :</strong> ?? </span>
+                            <span><strong>Kontrak :</strong>  </span>
                         </div>
                         <div>
                             <span><strong>Description :</strong> <span t-field="partner.name"/></span>
                         </div>
                         <div>
-                            <span><strong>Delivery Type :</strong>?? </span>
+                            <span><strong>Delivery Type :</strong> </span>
                         </div>
                     </div>
                     <div class="col-6" name="div_delivery_order_header_2">
                         <div>
-                            <span><strong>Date:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></span>
+                            <span><strong>Print Date:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></span>
                         </div>
                         <div>
-                            <span><strong>SO ID:</strong> ??</span>
+                            <span><strong>SO ID:</strong> </span>
                         </div>
                         <div>
                             <span><strong>Warranty Card :</strong> </span>
                         </div>
                         <div>
-                            <span><strong>Delivery Status :</strong> ??</span>
+                            <span><strong>Delivery Status :</strong> </span>
                         </div>
                     </div>
                 </div>
@@ -176,7 +176,7 @@
                         <br />
                         <br />
                         <br />
-                        <span>Person 1</span>
+                        <span t-field="o.authorize_id.name"/>
                     </div>
                     <div class="col-3 card ">
                         <span>Checked By</span>
@@ -186,7 +186,7 @@
                         <br />
                         <br />
                         <br />
-                        <span>Person 1</span>
+                        <span t-field="o.user_id.name"/>
                     </div>
                     <div class="col-3 card ">
                         <span>Recieved By</span>
